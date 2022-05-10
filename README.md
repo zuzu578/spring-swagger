@@ -78,7 +78,6 @@ public class SwaggerConfiguration {
 사용 
 
 ```java 
-
 /**
 	 * 사용자목록을 조회한다. (pageing)
 	 * @param userSearchVO 검색조건정보
@@ -88,14 +87,35 @@ public class SwaggerConfiguration {
 	 */
 	@GetMapping(value = "/uss/umt/EgovUserManageAjax.do")
 	@ApiOperation(value = "사용자목록 조회", notes = "사용자목록을 조회한다.")
-	// 필수 parameter 명시 
-		@ApiImplicitParam(
-	        name = "id"
-	        , value = "사용자 아이디"
-	        , required = true
-	        , dataType = "string"
-	        , paramType = "path"
-	        , defaultValue = "None")
+	@ApiImplicitParams(
+	        {
+	            @ApiImplicitParam(
+	                name = "sbscrbSttus"
+	                , value = "sbscrbSttus"
+	                , required = false
+	                , dataType = "string"
+	                , paramType = "path"
+	                , defaultValue = "None"
+	            )
+	        ,
+	            @ApiImplicitParam(
+	                name = "searchKeyword"
+	                , value = "응답 필드 종류"
+	                , required = false
+	                , dataType = "string"
+	                , paramType = "query"
+	                , defaultValue = ""
+	            )
+	           ,
+	            @ApiImplicitParam(
+		                name = "searchCondition"
+		                , value = "검색조건 0 : emplyr_id / 1: user_nm "
+		                , required = false
+		                , dataType = "string"
+		                , paramType = "query"
+		                , defaultValue = ""
+		            )
+	        })
 	public ModelAndView selectUserList(@ModelAttribute("userSearchVO") UserDefaultVO userSearchVO, ModelMap model) throws Exception {
 		
 		ModelAndView modelAndView = new ModelAndView();
